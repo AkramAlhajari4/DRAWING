@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+      /* styles.css */
+
+/* تصميم لوحة الرسم */
+#drawingBoard {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    grid-gap: 5px;
+    justify-content: center;
+    margin: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+/* تصميم الأزرار */
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* زر إعادة الضبط */
+#resetButton {
+    background-color: #dc3545;
+}
+
+#resetButton:hover {
+    background-color: #c82333;
+}
+    </style>
+</head>
+<body>
+    <!-- إنشاء لوحة الرسم بمصفوفة من div -->
+    <div id="drawingBoard">
+        <!-- يمكنك استخدام JavaScript لإنشاء هذه العناصر ديناميكيًا -->
+        <!-- في هذا المثال، سنستخدم JavaScript لإنشاء 4 صفوف و 4 أعمدة -->
+    </div>
+
+    <!-- أزرار الألوان -->
+    <button onclick="setColor('red')">أحمر</button>
+    <button onclick="setColor('blue')">أزرق</button>
+    <button onclick="setColor('green')">أخضر</button>
+
+    <!-- زر إعادة الضبط -->
+    <button onclick="resetBoard()">إعادة الضبط</button>
+
+    <script>
+        // JavaScript لإعداد اللوحة
+        const drawingBoard = document.getElementById('drawingBoard');
+        const colors = ['red', 'blue', 'green']; // الألوان المتاحة
+
+        // إنشاء الصفوف والأعمدة في لوحة الرسم
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                drawingBoard.appendChild(cell);
+            }
+            drawingBoard.appendChild(document.createElement('br'));
+        }
+
+        let selectedColor = 'black'; // اللون المحدد افتراضيًا
+
+        // تعيين اللون المحدد عند الضغط على زر اللون
+        function setColor(color) {
+            selectedColor = color;
+        }
+
+        // تغيير لون الخلية عند النقر عليها
+        drawingBoard.addEventListener('click', function (event) {
+            if (event.target.className === 'cell') {
+                event.target.style.backgroundColor = selectedColor;
+            }
+        });
+
+        // إعادة الضبط: تصفير لوحة الرسم
+        function resetBoard() {
+            const cells = document.querySelectorAll('.cell');
+            cells.forEach(cell => {
+                cell.style.backgroundColor = 'white';
+            });
+        }
+    </script>
+</body>
+</html>
